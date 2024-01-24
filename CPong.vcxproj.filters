@@ -18,6 +18,9 @@
     <ClCompile Include="ball.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="paddle.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.h">

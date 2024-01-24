@@ -1,6 +1,15 @@
 #include "ball.h"
 
-void DrawBall(Ball* pBall)
+void SetBallStartParams(Ball* pBall)
+{
+	pBall->position.x = GetScreenWidth() / 2;
+	pBall->position.y = GetScreenHeight() / 2;
+	pBall->velocity.x = 25;
+	pBall->velocity.y = 75;
+	pBall->velocityModifer = 1;
+}
+
+void DrawBall(const Ball* pBall)
 {
 	DrawCircle(pBall->position.x, pBall->position.y, BALL_RADIUS, BALL_COLOR);
 }
@@ -37,4 +46,9 @@ void FlipBallXVelocity(Ball* pBall)
 void FlipBallYVelocity(Ball* pBall)
 {
 	pBall->velocity.y *= -1;
+}
+
+void AdjustBallVelocityModifier(Ball* pBall, int change)
+{
+	pBall->velocityModifer += change;
 }

@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="ball.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="paddle.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

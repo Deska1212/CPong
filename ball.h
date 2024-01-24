@@ -14,11 +14,12 @@ typedef struct Ball
 	int velocityModifer;
 } Ball;
 
-void DrawBall(Ball* pBall);
+void SetBallStartParams(Ball* pBall);
 void UpdateBall(Ball* pBall);
+void DrawBall(const Ball* pBall);
 void CheckBallOutOfBounds(Ball* pBall);
 void FlipBallXVelocity(Ball* pBall);
 void FlipBallYVelocity(Ball* pBall);
-void AdjustVelocityModifier(Ball* pBall, int change);
+void AdjustBallVelocityModifier(Ball* pBall, int change);
 
 #endif // !BALL_H

@@ -3,14 +3,7 @@
 #include <stdlib.h>
 
 #include "ball.h"
-
-
-
-void DrawBall(Ball* pBall);
-void UpdateBall(Ball* pBall);
-void CheckBallOutOfBounds(Ball* pBall);
-void FlipBallXVelocity(Ball* pBall);
-void FlipBallYVelocity(Ball* pBall);
+#include "paddle.h"
 
 
 int main(int argc, char **argv)
@@ -21,10 +14,12 @@ int main(int argc, char **argv)
 	
 
 	Ball ball;
-	ball.position.x = GetScreenWidth() / 2;
-	ball.position.y = GetScreenHeight() / 2;
-	ball.velocity.x = 20;
-	ball.velocity.y = 100;
+	SetBallStartParams(&ball);
+
+	Paddle paddle;
+	SetPaddleStartParams(&paddle);
+
+
 	
 
 	
@@ -36,16 +31,17 @@ int main(int argc, char **argv)
 		// Update
 
 		UpdateBall(&ball);
+		UpdatePaddle(&paddle);
 
 		if (IsKeyPressed(KEY_E))
 		{
-			AdjustVelocityModifier(&ball, 1);
+			AdjustBallVelocityModifier(&ball, 1);
 			printf("Setting velocity modifier to: %d\n", ball.velocityModifer);
 		}
 
 		if (IsKeyPressed(KEY_Q) && ball.velocityModifer > 1)
 		{
-			AdjustVelocityModifier(&ball, -1);
+			AdjustBallVelocityModifier(&ball, -1);
 			printf("Setting velocity modifier to: %d\n", ball.velocityModifer);
 		}
 
@@ -54,6 +50,7 @@ int main(int argc, char **argv)
 		ClearBackground(WHITE);
 
 		DrawBall(&ball);
+		DrawPaddle(&paddle);
 
 
 		EndDrawing();
