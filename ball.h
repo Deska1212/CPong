@@ -6,6 +6,7 @@
 #define BALL_COLOR BLACK
 
 #include <raylib.h>
+#include "collision.h"
 
 typedef struct Ball
 {

@@ -9,7 +9,7 @@
 int main(int argc, char **argv)
 {
 	InitWindow(600, 800, "CPong");
-	SetTargetFPS(60);
+	SetTargetFPS(999);
 
 	
 
@@ -28,8 +28,10 @@ int main(int argc, char **argv)
 
 	while (!WindowShouldClose())
 	{
+
 		// Update
 
+		PollInputEvents();
 		UpdateBall(&ball);
 		UpdatePaddle(&paddle);
 
