@@ -11,8 +11,9 @@ typedef struct
 	float maxY;
 } CollisionBox;
 
-
-bool CollidingWith(const CollisionBox& other);
-void DebugDraw(const CollisionBox& box);
+CollisionBox InitCollisionBox(float width, float height, Vector2 center);
+void UpdateCollisionBox(CollisionBox* box, float width, float height, Vector2 newCenter);
+bool CollidingWith(const CollisionBox* a, const CollisionBox* b);
+void DebugDraw(const CollisionBox* box);
 
 #endif

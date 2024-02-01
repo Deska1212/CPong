@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ball.c" />
+    <ClCompile Include="collision.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="paddle.c" />
   </ItemGroup>
@@ -141,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ball.h" />
+    <ClInclude Include="collision.h" />
     <ClInclude Include="paddle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,8 +1,8 @@
 #ifndef BALL_H
 #define BALL_H
 
-#define BALL_RADIUS 10
-#define BALL_SPEED 20
+#define BALL_RADIUS 15
+#define BALL_SPEED 500
 #define BALL_COLOR BLACK
 
 #include <raylib.h>

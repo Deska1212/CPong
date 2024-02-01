@@ -5,7 +5,7 @@
 
 #define PADDLE_WIDTH 100
 #define	PADDLE_HEIGHT 20
-#define PADDLE_SPEED 200
+#define PADDLE_SPEED 400
 #define PADDLE_COLOUR BLACK
 
 typedef struct

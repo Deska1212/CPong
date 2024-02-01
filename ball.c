@@ -4,8 +4,8 @@ void SetBallStartParams(Ball* pBall)
 {
 	pBall->position.x = GetScreenWidth() / 2;
 	pBall->position.y = GetScreenHeight() / 2;
-	pBall->velocity.x = 25;
-	pBall->velocity.y = 75;
+	pBall->velocity.x = BALL_SPEED / 3;
+	pBall->velocity.y = BALL_SPEED;
 	pBall->velocityModifer = 1;
 }
 
@@ -25,13 +25,13 @@ void UpdateBall(Ball* pBall)
 
 void CheckBallOutOfBounds(Ball* pBall)
 {
-	if (pBall->position.x <= 0 || pBall->position.x >= GetScreenWidth())
+	if (pBall->position.x <= BALL_RADIUS || pBall->position.x >= GetScreenWidth() - BALL_RADIUS)
 	{
 		// Hit wall left or right
 		FlipBallXVelocity(pBall);
 	}
 
-	if (pBall->position.y <= 0 || pBall->position.y >= GetScreenHeight())
+	if (pBall->position.y <= BALL_RADIUS || pBall->position.y >= GetScreenHeight() - BALL_RADIUS)
 	{
 		// Hit right
 		FlipBallYVelocity(pBall);
