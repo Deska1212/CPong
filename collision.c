@@ -1,19 +1,23 @@
 #include "collision.h"
-#include <math.h>;
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-CollisionBox InitCollisionBox(float width, float height, Vector2 center)
+CollisionBox InitCollisionBox(const float width, const float height, const Vector2 center)
 {
 	// Initialised default/starting values for box
-	CollisionBox newCollisionBox;
-	newCollisionBox.minX = center.x - (width / 2);
-	newCollisionBox.minY = center.y - (height / 2);
-	newCollisionBox.maxX = center.x + (width / 2);
-	newCollisionBox.maxY = center.y + (height / 2);
+	CollisionBox box;
+	box.minX = center.x - (width / 2);
+	box.minY = center.y - (height / 2);
+	box.maxX = center.x + (width / 2);
+	box.maxY = center.y + (height / 2);
+	box.lastCollisionTime = 0;
+	box.collisionDirty = false;
 
-	return newCollisionBox;
+	return box;
 }
 
-void UpdateCollisionBox(CollisionBox* box, float width, float height, Vector2 center)
+void UpdateCollisionBox(CollisionBox* box, const float width, const float height, const Vector2 center)
 {
 	// Updates the collision boxes position values
 	box->minX = center.x - (width / 2);
@@ -21,38 +25,39 @@ void UpdateCollisionBox(CollisionBox* box, float width, float height, Vector2 ce
 	box->maxX = center.x + (width / 2);
 	box->maxY = center.y + (height / 2);
 
+	if (GetTime() > box->lastCollisionTime + COLLISION_DIRTY_TIME)
+	{
+		ResetCollisionDirty(&box);
+	}
+
 }
 
-bool CollidingWith(const CollisionBox* a, const CollisionBox* b)
+bool CollidingWith(CollisionBox* a, CollisionBox* b)
 {
+	printf("Colliding... %d\n", a->collisionDirty);
+
+	// Check if either boxes are flagged collision dirty (We have recently had a collision)
+	// if they are return early
+	if (a->collisionDirty || b->collisionDirty)
+	{
+		return false;
+	}
+
+
 	// Check if collision box is colliding with another
 
 	// Check horizontal collisions
-	if (a->minX > b->maxX)
+	bool isCollidingHorizontal = a->minX < b->maxX && a->maxX > b->minX;
+	bool isCollidingVertical = a->minY < b->maxY && a->maxY > b->minY;
+
+	// If there is no collision either horizontally or vertically, return
+	if (!isCollidingHorizontal || !isCollidingVertical)
 	{
-		// A's left edge is completely off the the right of B's right edge
 		return false;
 	}
-
-	if (a->maxX < b->minX)
-	{
-		// A's right edge is completely off to the left of B's left edge
-		return false;
-	}
-
-	// Check vertical collisions
-	if (a->minY > b->maxY)
-	{
-		// A is entriely below B
-		return false;
-	}
-
-	if (a->maxY < b->minY)
-	{
-		// A is entirely above B
-		return false;
-	}
-
+	// We are colliding
+	OnCollision(&a, &b);
+	OnCollision(&b, &a);
 	return true;
 }
 
@@ -67,4 +72,20 @@ void DebugDraw(const CollisionBox* box)
 	rect.y = box->minY;
 
 	DrawRectangleLines(rect.x, rect.y, w, h, RED);
+}
+
+void OnCollision(CollisionBox* box, CollisionBox* other)
+{
+	box->collisionDirty = true;
+	box->lastCollisionTime = GetTime();
+}
+
+void ResetCollisionDirty(CollisionBox* box)
+{
+	box->collisionDirty = false;
+}
+
+Vector2 CaclulateNonCollidingPosition(CollisionBox* boxToMove, CollisionBox* boxToCheckAgainst)
+{
+	
 }

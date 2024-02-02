@@ -49,12 +49,16 @@ int main(int argc, char **argv)
 		UpdateCollisionBox(&ballCollisionBox, BALL_RADIUS * 2, BALL_RADIUS * 2, ball.position);
 		
 		bool coll = CollidingWith(&ballCollisionBox, &paddleCollisionBox);
-		printf("Ball colliding with paddle?: %d \n", coll);
 
 		// Check ball is colliding with paddle
 		if (CollidingWith(&ballCollisionBox, &paddleCollisionBox))
 		{
 			FlipBallYVelocity(&ball);
+
+			// Vector2 adjustedBallPosition = CalculateNonCollidingPosition(&ballCollisionBox, &paddleCollisionBox);
+			
+			// ball.position = adjustedBallPosition;
+
 		}
 
 		if (IsKeyPressed(KEY_E))

@@ -1,6 +1,7 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
+
 #include <raylib.h>
 
 #define PADDLE_WIDTH 100
